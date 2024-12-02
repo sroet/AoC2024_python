@@ -19,21 +19,21 @@ def is_safe(report, part_2=False):
             line = diff
         else:
             if not part_2:
+                # part 1 or second try in part 2
                 return False
-            # part_2 or second try in part 2
+            # first try in part 2
             temp1 = report.copy()
             temp1.pop(pos)
             temp2 = report.copy()
             temp2.pop(pos+1)
             safe = (is_safe(temp1) or is_safe(temp2))
             if line*diff < 0:
-                # problem might be 1 further back
+                # problem might be 1 further back due to switching rule
                 temp3 = report.copy()
                 temp3.pop(pos-1)
                 safe = (safe or is_safe(temp3))
             return safe
-    else:
-        return True
+    return True
  
 
 def part_1(data):

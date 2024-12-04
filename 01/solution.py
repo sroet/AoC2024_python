@@ -2,6 +2,7 @@ import argparse
 import time
 from collections import Counter
 
+
 def read_file(fname):
     left_list = []
     right_list = []
@@ -20,17 +21,19 @@ def part_1(data):
     left_list.sort()
     right_list.sort()
     out = 0
-    for l,r in zip(left_list, right_list):
-        out += abs(l-r)
+    for l, r in zip(left_list, right_list):
+        out += abs(l - r)
     return out
+
 
 def part_2(data):
     left_list, right_list = data
     count_right = Counter(right_list)
     out = 0
     for l in left_list:
-        out += l*count_right[l]
+        out += l * count_right[l]
     return out
+
 
 def main(fname):
     start = time.time()
@@ -43,6 +46,7 @@ def main(fname):
     print(f"Part 2: {total_2}")
     print(f"Ran in {time.time()-t1} s")
     print(f"Total ran in {time.time()-start} s")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

@@ -2,6 +2,7 @@ import argparse
 import time
 from itertools import pairwise
 
+
 def read_file(fname):
     data = []
     with open(fname, "r") as file:
@@ -11,11 +12,12 @@ def read_file(fname):
                 data.append([int(i) for i in strip.split()])
     return data
 
+
 def is_safe(report, part_2=False):
     line = 0
-    for pos, (i,j) in enumerate(pairwise(report)):
-        diff = i-j
-        if 1 <= abs(diff) <= 3 and line*diff >= 0:
+    for pos, (i, j) in enumerate(pairwise(report)):
+        diff = i - j
+        if 1 <= abs(diff) <= 3 and line * diff >= 0:
             line = diff
         else:
             if not part_2:
@@ -25,16 +27,16 @@ def is_safe(report, part_2=False):
             temp1 = report.copy()
             temp1.pop(pos)
             temp2 = report.copy()
-            temp2.pop(pos+1)
-            safe = (is_safe(temp1) or is_safe(temp2))
-            if line*diff < 0:
+            temp2.pop(pos + 1)
+            safe = is_safe(temp1) or is_safe(temp2)
+            if line * diff < 0:
                 # problem might be 1 further back due to switching rule
                 temp3 = report.copy()
-                temp3.pop(pos-1)
-                safe = (safe or is_safe(temp3))
+                temp3.pop(pos - 1)
+                safe = safe or is_safe(temp3)
             return safe
     return True
- 
+
 
 def part_1(data):
     safe = 0
@@ -43,12 +45,14 @@ def part_1(data):
             safe += 1
     return safe
 
+
 def part_2(data):
     safe = 0
     for report in data:
         if is_safe(report, part_2=True):
             safe += 1
     return safe
+
 
 def main(fname):
     start = time.time()
@@ -61,6 +65,7 @@ def main(fname):
     print(f"Part 2: {total_2}")
     print(f"Ran in {time.time()-t1} s")
     print(f"Total ran in {time.time()-start} s")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

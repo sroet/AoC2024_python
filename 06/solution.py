@@ -13,7 +13,7 @@ def read_file(fname):
 
 
 def turn_right(direction):
-    return complex(direction.imag, -direction.real)
+    return direction * -1j
 
 
 def part_1(data):
